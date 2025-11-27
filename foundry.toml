@@ -1,0 +1,15 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+gas_limit = 5000000
+
+remappings=[]
+
+[rpc_endpoints]
+educhain = "https://rpc.open-campus-codex.gelato.digital/"
+
+[etherscan]
+educhain = { key = "" }
+
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
