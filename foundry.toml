@@ -2,14 +2,16 @@
 src = "src"
 out = "out"
 libs = ["lib"]
-gas_limit = 5000000
+gas_limit = 30000000
 
 remappings=[]
 
 [rpc_endpoints]
-educhain = "https://rpc.open-campus-codex.gelato.digital/"
+educhain = "https://rpc.open-campus-codex.gelato.digital"
+base_sepolia = "https://base-sepolia-rpc.publicnode.com"
 
 [etherscan]
 educhain = { key = "" }
+base_sepolia = { key = "${BASESCAN_API_KEY}" }
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options

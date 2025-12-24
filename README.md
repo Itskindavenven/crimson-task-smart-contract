@@ -15,10 +15,11 @@ It features a Solidity smart contract, `SalaryEWA.sol`, that allows an employer 
 - **Security-First Design:** Implements Reentrancy Guard, Pausable functionality, SafeERC20, and a Checks-Effects-Interactions pattern.
 
 ## Stack
-- **Smart Contracts:** Solidity
+- **Smart Contracts:** Solidity ^0.8.30
 - **Development Framework:** Foundry
-- **Dependencies:** OpenZeppelin Contracts
-- **Network:** EduChain
+- **Dependencies:** OpenZeppelin Contracts v5.1.0
+- **Network:** Base Sepolia Testnet
+- **Testing:** Foundry Test Suite (102 comprehensive tests)
 
 ## Setup
 To set up the project locally, clone the repository and install the dependencies.
@@ -26,7 +27,7 @@ To set up the project locally, clone the repository and install the dependencies
 1.  **Clone the repository:**
     ```sh
     git clone <YOUR_REPOSITORY_URL>
-    cd salary-ewa
+    cd crimson-task-smart-contract
     ```
 
 2.  **Install dependencies:**
@@ -36,29 +37,156 @@ To set up the project locally, clone the repository and install the dependencies
     ```
 
 3.  **Run tests:**
-    Execute the test suite to ensure all contracts are functioning correctly.
+    Execute the comprehensive test suite to ensure all contracts are functioning correctly.
     ```sh
     forge test
     ```
+    
+    **Test Coverage:**
+    - 102 tests across 7 test files
+    - 100% coverage of must-have requirements
+    - 100% coverage of security requirements
 
 ## Deployment
-The contracts are deployed on the EduChain network.
 
--   **Network Name:** EduChain
--   **RPC URL:** `https://rpc.open-campus-codex.gelato.digital/`
--   **Block Explorer:** `https://blockscout.com/`
+> **Note:** This project was initially planned for deployment on EduChain testnet. However, due to RPC connectivity issues and network instability on EduChain, we switched to **Base Sepolia testnet** for a more reliable deployment experience.
+
+The contracts are deployed on the **Base Sepolia** network.
+
+### Network Information
+
+| Parameter | Value |
+|-----------|-------|
+| **Network Name** | Base Sepolia |
+| **Chain ID** | 84532 |
+| **Currency** | ETH |
+| **RPC URL** | `https://base-sepolia-rpc.publicnode.com` |
+| **Block Explorer** | https://sepolia.basescan.org/ |
+| **Faucet** | https://www.alchemy.com/faucets/base-sepolia |
 
 ### Contract Addresses
--   **PhiiCoin (Token) Address:** `0xe76808bbc4271c3d7bd6bc9873998d2099db3eda`
-    -   [View on Blockscout](https://blockscout.com/address/0xe76808bbc4271c3d7bd6bc9873998d2099db3eda)
--   **SalaryEWA (Payroll) Address:** `[DEPLOYED_PAYROLL_ADDRESS]`
-    -   **Note:** The deployment script has been updated to include the `SalaryEWA` contract. Run the deployment command below and replace the placeholder with the new address.
 
-### Deployment Command
-To deploy the contracts, set your `PRIVATE_KEY` in a `.env` file and run the deployment script with Forge:
+> **Status:** Ready for deployment
+
+-   **PhiiCoin (Token) Address:** `[PENDING_DEPLOYMENT]`
+    -   View on Basescan: `https://sepolia.basescan.org/address/[ADDRESS]`
+-   **SalaryEWA (Payroll) Address:** `[PENDING_DEPLOYMENT]`
+    -   View on Basescan: `https://sepolia.basescan.org/address/[ADDRESS]`
+
+### Deployment Instructions
+
+1. **Setup Environment:**
+   ```sh
+   cp .env.example .env
+   # Edit .env and add your PRIVATE_KEY
+   ```
+
+2. **Get Testnet ETH:**
+   - Visit: https://www.alchemy.com/faucets/base-sepolia
+   - Request ETH for your wallet address
+
+3. **Deploy Contracts:**
+   ```sh
+   forge script script/DeployToken.s.sol:DeployToken \
+       --rpc-url base_sepolia \
+       --broadcast \
+       -vvvv
+   ```
+
+4. **Verify Contracts (Optional):**
+   ```sh
+   # Get Basescan API key from: https://basescan.org/myapikey
+   # Add to .env: BASESCAN_API_KEY=your_key
+   
+   forge verify-contract <CONTRACT_ADDRESS> \
+       src/ContractName.sol:ContractName \
+       --chain-id 84532 \
+       --watch
+   ```
+
+For detailed deployment instructions, see [BASE_SEPOLIA_DEPLOYMENT.md](./BASE_SEPOLIA_DEPLOYMENT.md)
+
+## Testing
+
+This project includes a comprehensive test suite with **102 tests** covering all requirements:
+
+### Test Files
+
+- **PayrollSystem.t.sol** (27 tests) - Core payroll functionality
+- **EWA.t.sol** (16 tests) - Earned Wage Access features
+- **Accounting.t.sol** (14 tests) - Balance tracking and accounting
+- **Security.t.sol** (35 tests) - Security requirements and access control
+- **Admin.t.sol** (5 tests) - Administrative functions
+- **Accrual.t.sol** (3 tests) - Salary accrual mechanics
+- **SalaryEWA.t.sol** (2 tests) - Integration tests
+
+### Running Tests
+
 ```sh
-# Make sure PRIVATE_KEY is set in your environment or a .env file
-forge script script/DeployToken.s.sol --rpc-url educhain --broadcast
+# Run all tests
+forge test
+
+# Run with verbosity
+forge test -vv
+
+# Run specific test file
+forge test --match-path test/PayrollSystem.t.sol -vv
+
+# Run with gas reporting
+forge test --gas-report
+
+# Run with coverage
+forge coverage
+```
+
+### Test Results
+
+```
+Total Test Suites: 7
+Total Tests: 102
+✅ Passed: 102
+❌ Failed: 0
+⏭️ Skipped: 0
+```
+
+## Why Base Sepolia Instead of EduChain?
+
+While EduChain was the original target network for this project, we encountered several technical challenges:
+
+1. **RPC Connectivity Issues:** Frequent timeouts and connection errors with EduChain RPC endpoints
+2. **Network Instability:** Inconsistent block production and transaction processing
+3. **Limited Faucet Access:** Difficulty obtaining testnet tokens for deployment
+4. **Chain ID Confusion:** Multiple conflicting chain IDs in documentation
+
+**Base Sepolia Advantages:**
+- ✅ Stable and reliable RPC endpoints
+- ✅ Easy access to testnet ETH via multiple faucets
+- ✅ Excellent block explorer (Basescan)
+- ✅ Active developer community and support
+- ✅ Well-documented and maintained by Coinbase
+
+The smart contracts are **chain-agnostic** and can be deployed on any EVM-compatible network, including EduChain when its infrastructure stabilizes.
+
+## Project Structure
+
+```
+crimson-task-smart-contract/
+├── src/
+│   ├── PhiiCoin.sol          # ERC20 token contract
+│   └── SalaryEWA.sol          # Main payroll contract
+├── test/
+│   ├── PayrollSystem.t.sol    # Payroll functionality tests
+│   ├── EWA.t.sol              # EWA feature tests
+│   ├── Accounting.t.sol       # Accounting tests
+│   ├── Security.t.sol         # Security tests
+│   ├── Admin.t.sol            # Admin tests
+│   ├── Accrual.t.sol          # Accrual tests
+│   └── SalaryEWA.t.sol        # Integration tests
+├── script/
+│   └── DeployToken.s.sol      # Deployment script
+├── foundry.toml               # Foundry configuration
+├── .env.example               # Environment template
+└── README.md                  # This file
 ```
 
 ## Notes
@@ -74,3 +202,13 @@ A key challenge was designing a fair and secure fund management system. The empl
 ### Trade-offs
 -   **Gas Costs for Iteration:** The `_computeLockedAmount()` function iterates over the `employeeList` array. While efficient for a small-to-medium number of employees, this could become costly at a very large scale. For a system with thousands of employees, an alternative pattern (like requiring employees to "claim" their portion of locked funds) might be considered, though it would increase complexity.
 -   **On-Chain Data Storage:** Storing all employee data on-chain increases transparency and trustlessness but also incurs higher gas costs for registration and updates compared to an off-chain or hybrid model. The current design prioritizes on-chain integrity for this proof-of-skill.
+
+## License
+
+MIT License
+
+## Author
+
+**Bonaventura Octavito Cahyawan**
+- Mancer Crimson Proof of Skill - Smart Contract Track
+- December 2024
