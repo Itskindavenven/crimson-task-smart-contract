@@ -66,12 +66,18 @@ The contracts are deployed on the **Base Sepolia** network.
 
 ### Contract Addresses
 
-> **Status:** Ready for deployment
+✅ **Deployed & Verified on Base Sepolia** (Block: 35402174)
 
--   **PhiiCoin (Token) Address:** `[PENDING_DEPLOYMENT]`
-    -   View on Basescan: `https://sepolia.basescan.org/address/[ADDRESS]`
--   **SalaryEWA (Payroll) Address:** `[PENDING_DEPLOYMENT]`
-    -   View on Basescan: `https://sepolia.basescan.org/address/[ADDRESS]`
+-   **PhiiCoin (Token):** `0x6eAc85faD7faED5E44853edFA45246704795BeAc` ✅ Verified
+    -   [View Contract](https://sepolia.basescan.org/address/0x6eAc85faD7faED5E44853edFA45246704795BeAc)
+    -   [View Source Code](https://sepolia.basescan.org/address/0x6eAc85faD7faED5E44853edFA45246704795BeAc#code)
+    
+-   **SalaryEWA (Payroll):** `0xD875b836C85047C4eA4584E8B74e7eefE1ccC1bc` ✅ Verified
+    -   [View Contract](https://sepolia.basescan.org/address/0xD875b836C85047C4eA4584E8B74e7eefE1ccC1bc)
+    -   [View Source Code](https://sepolia.basescan.org/address/0xD875b836C85047C4eA4584E8B74e7eefE1ccC1bc#code)
+    
+-   **Deployer/Owner:** `0x906B34db1a8DD333ff9a84255e4AEc13C054f120`
+    -   [View Address](https://sepolia.basescan.org/address/0x906B34db1a8DD333ff9a84255e4AEc13C054f120)
 
 ### Deployment Instructions
 
@@ -211,4 +217,4 @@ MIT License
 
 **Bonaventura Octavito Cahyawan**
 - Mancer Crimson Proof of Skill - Smart Contract Track
-- December 2024
+- December 2025
